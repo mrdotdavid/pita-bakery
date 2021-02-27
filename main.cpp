@@ -4,8 +4,8 @@ using std::cout;
 using std::endl;
 
 int main() {
-    Bakery obj;
-    obj.start();
+    Bakery pita;
+    pita.calcTotalTime();
 
     return 0;
 }
