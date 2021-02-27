@@ -5,5 +5,4 @@ struct Bakery {
     float calcMediumPitasTime(float qty);
     float calcLargePitasTime(float qty);
     void calcTotalTime();
-    void start();
 };
