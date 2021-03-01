@@ -6,48 +6,42 @@
 using std::cout;
 using std::cin;
 using std::endl;
-using std::string;
 
-float SMALL_TIME = 4.5;                     // Contants represent how long, in minutes, 
-float MEDIUM_TIME = 3.25;                   // it takes to fill one tray of that size.
+float SMALL_TIME = 4.5;                                 // Contants represent how long, in minutes, 
+float MEDIUM_TIME = 3.25;                               // it takes to fill one tray of that size.
 float LARGE_TIME = 3;
 
-float Bakery::calcSmallPitasTime(float qty) {
-    float trays = qty / 40;                 // Calculates how many trays are required
-    float smallTime = trays * SMALL_TIME;   // for the given amount of pitas.
-    return smallTime;
+float Bakery::calcPitaTime(float smallQty, float mediumQty, float largeQty) {
+    float smallTrays    = smallQty / 40;                // Calculates how many trays are required
+    float mediumTrays   = mediumQty / 30;               // for the given amount of pitas.
+    float largeTrays    = largeQty / 25;
+
+    float smallTime     = smallTrays * SMALL_TIME;      // Multipply the amount of trays by their
+    float mediumTime    = mediumTrays * MEDIUM_TIME;    // respective times to get their total time in minutes.
+    float largeTime     = largeTrays * LARGE_TIME;
+    float totalTimeMins = smallTime + mediumTime + largeTime;
+
+    return totalTimeMins;                               // Returning total time in minutes.
 }
 
-float Bakery::calcMediumPitasTime(float qty) {
-    float trays = qty / 30;
-    float mediumTime = trays * MEDIUM_TIME; // Multiply the amount of trays by their
-    return mediumTime;                      // respective times to get their total time.
-}
+void Bakery::readOrder() {
+    float smallQty, mediumQty, largeQty;
+    float hours, minutes, totalMinutes;
 
-float Bakery::calcLargePitasTime(float qty) {
-    float trays = qty / 25;
-    float largeTime = trays * LARGE_TIME;
-    return largeTime;                       // Returning total time it takes for that order.
-}
-
-void Bakery::calcTotalTime() {
-    float smallPitasQty, mediumPitasQty, largePitasQty;
-    float hours, seconds, totalTime;
-
-    cout << "How many small pitas? ";       // Reads in number of orders
-    cin >> smallPitasQty;
+    cout << "How many small pitas? ";                   // Reads in number of orders
+    cin >> smallQty;
     cout << "How many medium pitas? ";
-    cin >> mediumPitasQty;
+    cin >> mediumQty;
     cout << "How many large pitas? ";
-    cin >> largePitasQty;
+    cin >> largeQty;
 
-    totalTime = (calcSmallPitasTime(smallPitasQty) +
-                calcMediumPitasTime(mediumPitasQty) +
-                calcLargePitasTime(largePitasQty)) / 60; // Set totalTime to what our functions return.
-
-    seconds = ((std::modf(totalTime, &hours) * 60));     // Separates whole number and fractional part.
+    // Set totalMinutes equal to calcPitaTiem divided by 60 to get the total amount of hours in decimal form.
+    // std::modf will separate our totalMinutes variable into two parts: whole number and fractional.
+    // std::modf will help us get, for example, 4 hours and 30 minutes instead of 4.5 hours.
+    totalMinutes = calcPitaTime(smallQty, mediumQty, largeQty) / 60;
+    minutes = ((std::modf(totalMinutes, &hours) * 60));
 
     cout << "Total time to complete: ";
     cout << hours << " hours and ";
-    cout << std::fixed << std::setprecision(0) << seconds << " seconds.";
+    cout << std::fixed << std::setprecision(0) << minutes << " minutes.";
 }
