@@ -43,5 +43,6 @@ void Bakery::readOrder() {
 
     cout << "Total time to complete: ";
     cout << hours << " hours and ";
-    cout << std::fixed << std::setprecision(0) << minutes << " minutes.";
+    cout << std::fixed << std::setprecision(0) << minutes;
+    cout << " minutes." << endl;
 }
