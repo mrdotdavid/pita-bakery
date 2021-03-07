@@ -13,10 +13,42 @@ float MEDIUM_TIME = 3;                               // it takes to fill one tra
 float LARGE_TIME = 3;
 
 void Bakery::menu() {
-    
+    int option;
+
+    cout << "1. Calculate total time of orders." << endl;
+    cout << "2. Calculate how many trays for one order." << endl;
+    cout << "3. Access archived order." << endl << endl;
+    cout << "Select your choice: ";
+    cin >> option;
+
+    switch (option) {
+        case 1: readOrder();
+        break;
+        case 2: calcTrays();
+        break;
+        default: cout << "Pick an option! " << endl;
+    }
 }
 
+void Bakery::calcTrays() {
+    float pitaQty, pitaPerTray, trayQty, trayWholeNum, trayFraction, divisor;
+    cout << "How many pitas? ";
+    cin >> pitaQty;
+    cout << "How many per tray? ";
+    cin >> pitaPerTray;
+
+    trayQty = pitaQty / pitaPerTray;            // Dividing to get how many trays we'll fill up.
+    cout << "Tray qty: " << trayQty << endl;
+    trayFraction = ((std::modf(trayQty, &trayWholeNum) * pitaPerTray)); // Splitting to get the remainding tray
+    cout << trayWholeNum << "x" << pitaPerTray << " trays." << endl;
+
+    if (trayFraction != 0) {                                // Check if there is a fraction.
+        cout << "1x" << trayFraction << " tray." << endl;   // In the case that there is no fraction,
+    }                                                       // i.e. 30 total pitas / 30 pitaPerTray,
+}                                                           // will not return a fraction.
+
 void Bakery::readOrder() {
+    float smallQty, mediumQty, largeQty;
 
     cout << "How many small pitas? ";                   // Reads in number of orders
     cin >> smallQty;
@@ -29,7 +61,6 @@ void Bakery::readOrder() {
     // It will help us get, for example, 4 hours and 30 minutes instead of 4.5 hours.
 
     calcPitaTime(smallQty, mediumQty, largeQty, smallTime, mediumTime, largeTime, totalTime);
-
     isOverHour(smallTime, smallHours, smallMinutes, small);
     isOverHour(mediumTime, mediumHours, mediumMinutes, medium);
     isOverHour(largeTime, largeHours, largeMinutes, large);
@@ -38,9 +69,9 @@ void Bakery::readOrder() {
 
 float Bakery::calcPitaTime(float smallQty, float mediumQty, float largeQty, 
                             float &smallTime, float &mediumTime, float &largeTime, float &totalTime) {
-    smallTrays  = smallQty / 40;                // Calculates how many trays are required
-    mediumTrays = mediumQty / 30;               // for the given amount of pitas.
-    largeTrays  = largeQty / 25;
+    float smallTrays  = smallQty / 40;                // Calculates how many trays are required
+    float mediumTrays = mediumQty / 30;               // for the given amount of pitas.
+    float largeTrays  = largeQty / 25;
 
     smallTime   = smallTrays * SMALL_TIME;      // Multipply the amount of trays by their
     mediumTime  = mediumTrays * MEDIUM_TIME;    // respective times to get their total time in minutes.
@@ -64,7 +95,7 @@ bool Bakery::isOverHour(float total, float wholeNumber, float fraction, pitaSize
     if (total >= 60.0) {                                // If over 60, split the whole number and fractional part.
         total /= 60;
         fraction = ((std::modf(total, &wholeNumber) * 60));    // Splitting apart whole number to hours variable,
-        cout << size << " time completion: ";           // and fractional part to minutes variable.
+        cout << size << " time completion: ";                  // and fractional part to minutes variable.
         cout << wholeNumber << " hours and ";
         cout << std::fixed << std::setprecision(0) << fraction;
         cout << " minutes." << endl;
