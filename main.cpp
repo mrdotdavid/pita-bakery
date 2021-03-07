@@ -2,7 +2,7 @@
 
 int main() {
     Bakery pita;
-    pita.readOrder();
+    pita.menu();
 
     return 0;
 }
