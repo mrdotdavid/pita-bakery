@@ -1,5 +1,5 @@
 # Pita Bakery Completion Timer
-This code is designed to find out when a given work day will end. Because of its nature, knowing what time an employee would be leaving is impossible unless calculated. This program gives an approximated completion time based on the number of orders.
+This program is designed to give an approximation to when a given work day will end and/or how many trays are required for that order; the user is given the choice. Because of its nature, knowing what time an employee would be leaving is difficult and inconvenient.
 
 ### Instructions to run the code:
-+ Compile the code with: g++ main.cpp bakery.cpp -o "executable name"
++ Compile the code with: g++ main.cpp bakery.cpp
