@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <string>
 #include <math.h>
@@ -8,8 +9,8 @@ using std::cin;
 using std::endl;
 using std::string;
 
-float SMALL_TIME = 4.5;                                 // Contants represent how long, in minutes, 
-float MEDIUM_TIME = 3;                               // it takes to fill one tray of that size.
+float SMALL_TIME = 4.5;          // Contants represent how long, in minutes, 
+float MEDIUM_TIME = 3;           // it takes to fill one tray of that size.
 float LARGE_TIME = 3;
 
 void Bakery::menu() {
@@ -21,7 +22,7 @@ void Bakery::menu() {
     cout << "Select your choice: ";
     cin >> option;
 
-    switch (option) {
+    switch (option) {          
         case 1: readOrder();
         break;
         case 2: calcTrays();
@@ -31,16 +32,15 @@ void Bakery::menu() {
 }
 
 void Bakery::calcTrays() {
-    float pitaQty, pitaPerTray, trayQty, trayWholeNum, trayFraction, divisor;
+    float pitaQty, pitaPerTray, trayQty, trayWholeNum, trayFraction;
     cout << "How many pitas? ";
     cin >> pitaQty;
     cout << "How many per tray? ";
     cin >> pitaPerTray;
 
-    trayQty = pitaQty / pitaPerTray;            // Dividing to get how many trays we'll fill up.
-    cout << "Tray qty: " << trayQty << endl;
-    trayFraction = ((std::modf(trayQty, &trayWholeNum) * pitaPerTray)); // Splitting to get the remainding tray
-    cout << trayWholeNum << "x" << pitaPerTray << " trays." << endl;
+    trayQty = pitaQty / pitaPerTray;                                    // Dividing to get how many 
+    trayFraction = ((std::modf(trayQty, &trayWholeNum) * pitaPerTray)); // trays we'll fill up.
+    cout << trayWholeNum << "x" << pitaPerTray << " trays." << endl;    // Splitting to get the remainding tray
 
     if (trayFraction != 0) {                                // Check if there is a fraction.
         cout << "1x" << trayFraction << " tray." << endl;   // In the case that there is no fraction,
@@ -48,8 +48,6 @@ void Bakery::calcTrays() {
 }                                                           // will not return a fraction.
 
 void Bakery::readOrder() {
-    float smallQty, mediumQty, largeQty;
-
     cout << "How many small pitas? ";                   // Reads in number of orders
     cin >> smallQty;
     cout << "How many medium pitas? ";
@@ -108,3 +106,16 @@ bool Bakery::isOverHour(float total, float wholeNumber, float fraction, pitaSize
     return false;
 }
 
+void Bakery::writeData() {
+    std::ofstream invoice;
+    invoice.open("invoice.txt");
+
+    invoice.close();
+}
+
+void Bakery::readData() {
+    std::ifstream invoice;
+    invoice.open("invoice.txt");
+
+    invoice.close();
+}
