@@ -9,16 +9,15 @@ using std::cin;
 using std::endl;
 using std::string;
 
-float SMALL_TIME = 4.5;          // Contants represent how long, in minutes, 
-float MEDIUM_TIME = 3;           // it takes to fill one tray of that size.
-float LARGE_TIME = 3;
+float SMALL_TIME = 4.5;             // Contants represent how long, in minutes, 
+float MEDIUM_TIME = 2.562;          // it takes to fill one tray of that size.
+float LARGE_TIME = 2.365;
 
 void Bakery::menu() {
     int option;
 
     cout << "1. Calculate total time of orders." << endl;
     cout << "2. Calculate how many trays for one order." << endl;
-    cout << "3. Access archived order." << endl << endl;
     cout << "Select your choice: ";
     cin >> option;
 
@@ -27,7 +26,7 @@ void Bakery::menu() {
         break;
         case 2: calcTrays();
         break;
-        default: cout << "Pick an option! " << endl;
+        default: cout << "Pick an option!" << endl;
     }
 }
 
