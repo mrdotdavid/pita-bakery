@@ -9,9 +9,9 @@ using std::cin;
 using std::endl;
 using std::string;
 
-float SMALL_TIME = 4.5;             // Contants represent how long, in minutes, 
-float MEDIUM_TIME = 2.562;          // it takes to fill one tray of that size.
-float LARGE_TIME = 2.365;
+float SMALL_TIME = 3.87;             // Contants represent how long, in minutes, 
+float MEDIUM_TIME = 2.58;          // it takes to fill one tray of that size.
+float LARGE_TIME = 2.63;
 
 void Bakery::menu() {
     int option;
